@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1924385_김민규_term</title>
+    <script src="jquery-3.7.0.min.js"></script>
+    <script src="jquery-migrate-3.4.1.js"></script>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+    html {
+      line-height: 1.15;
+    }
+    div {
+      box-sizing: border-box;
+    }
+    h1 {
+      line-height: 1.5;
+    }
+    .login_screen {
+      display: block;
+      min-width: 400px;
+      max-width: 600px;
+      width: 30%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 70px auto;
+      padding: 25px;
+      animation: fade-in 0.3s ease-in;
+    }
+    .admin_user_screen {
+      display: none;
+      width: 80%;
+      min-width: 1000px;
+      max-width: 1300px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 70px auto;
+      padding: 25px;
+      animation: fade-in 0.3s ease-in;
+    }
+    .general_user_screen {
+      display: none;
+      min-width: 1000px;
+      max-width: 1300px;
+      width: 80%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 70px auto;
+      padding: 25px;
+      animation: fade-in 0.3s ease-in;
+    }
+    .add_items_div {
+      text-align: center;
+    }
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    .login_box input {
+      box-sizing: border-box;
+      display: inline-block;
+      width: 100%;
+      padding: 12px 20px;
+      margin: 0;
+      border: 0;
+      border-bottom: 1px solid #747474;
+      outline: none;
+    }
+    .login_notification {
+      margin: 10px 0px 4px;
+      height: auto;
+    }
+    .login_notification p {
+      font-size: 13px;
+      margin: auto 0px;
+      text-align: center;
+    }
+    .login_register_btn {
+      display: flex;
+    }
+    .login_register_btn button {
+      flex: 1;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      border: transparent;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      cursor: pointer;
+    }
+    #login_btn {
+      background-color: #8165ac;
+    }
+    #register_btn {
+      background-color: #a39771;
+    }
+    #user_list,
+    #order_list_div,
+    #order_list_div_admin {
+      display: none;
+      animation: fade-in 0.3s ease-in;
+    }
+    #user_list p {
+      flex: 1;
+    }
+    .user_table,
+    .order_list_table,
+    .order_list_table_admin {
+      width: 100%;
+      border-spacing: 0;
+      text-align: center;
+    }
+    .user_table td,
+    .order_list_table td,
+    .order_list_table_admin td {
+      border: 1px solid #000;
+    }
+    .user_table th,
+    .order_list_table th,
+    .order_list_table_admin th {
+      border: 1px solid #000;
+      font-size: large;
+      padding: 5px;
+    }
+    .user_table th:nth-child(3) {
+      width: 120px;
+    }
+    .user_table th:nth-child(4) {
+      width: 200px;
+    }
+    .order_list_table th:nth-child(2),
+    .order_list_table_admin th:nth-child(3) {
+      width: 100px;
+    }
+    .order_list_table th:nth-child(3),
+    .order_list_table_admin th:nth-child(4) {
+      width: 200px;
+    }
+    #cart_table th:nth-child(1) {
+      width: 40px;
+    }
+    #cart_table th:nth-child(3) {
+      width: 100px;
+    }
+    #cart_table th:nth-child(4) {
+      width: 25px;
+    }
+    .user_list_btn {
+      background-color: #f0f0f0;
+      color: #333;
+      cursor: pointer;
+      height: 2.5rem;
+      height: 35px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: auto;
+      border-radius: 0.25rem;
+      border: none;
+      margin: 3px 5px;
+      transition: background-color 0.3s ease;
+    }
+    .kick_btn {
+      width: 70px;
+    }
+    .role_change_btn {
+      width: 105px;
+    }
+    .role {
+      display: flex;
+    }
+    #logout_btn {
+      background-color: transparent;
+      cursor: pointer;
+      width: 80px;
+      height: 2.5rem;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: auto;
+      margin-bottom: auto;
+      border-radius: 0.25rem;
+      border: 0.0625rem solid rgb(206, 212, 218);
+      position: relative;
+      line-height: 1;
+    }
+    .main_menu {
+      justify-content: space-between;
+      display: flex;
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      margin-bottom: 15px;
+    }
+    .main_menu_buttons {
+      display: flex;
+    }
+    .main_menu_buttons button {
+      transition: background-color 0.6s ease;
+      width: 126px;
+      height: 64px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: bold;
+      border: transparent;
+      color: black;
+      background-color: white;
+      padding: 13px 10px;
+      margin: 13px 0px;
+      cursor: pointer;
+    }
+    .items {
+      display: block;
+      animation: fade-in 0.3s ease-in;
+    }
+    #cat_items {
+      width: 70%;
+    }
+    #item_list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+    #item_list p {
+      display: inline;
+    }
+    #item_cart {
+      display: flex;
+    }
+    .item_category {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0px;
+    }
+    .item_cat_btn {
+      cursor: pointer;
+      margin: 0px 5px 0px 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #f0f0f0;
+      color: #333;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .cat_divider {
+      margin: auto 5px;
+      width: 10px;
+      height: 10px;
+      background-color: #f0f0f0;
+      border-radius: 20px;
+    }
+    #item_list div {
+      text-align: center;
+      border: 1px solid rgb(206, 212, 218);
+      transition: background-color 0.2s ease;
+      width: calc(20% - 15px);
+      height: 100px;
+      margin-top: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      cursor: pointer;
+      animation: item-click-animation 0.2s linear;
+    }
+    @keyframes item-click-animation {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    #cart {
+      text-align: center;
+      width: 30%;
+      height: 500px;
+      border: none;
+      border-left: 1px dashed black;
+      background-color: #ffffff;
+    }
+    #cart_table_div {
+      min-height: 65%;
+      width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #cart_table {
+      width: 100%;
+    }
+    #total_price_div {
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      width: 178px;
+      height: 40px;
+      border: none;
+      border-radius: 4px;
+      background-color: #f0f0f0;
+    }
+    #total_price_div p {
+      display: inline-block;
+      margin: 10px 0px;
+    }
+    #total_price {
+      transition: color 0.3s ease;
+    }
+    .cart-btns {
+      margin-top: 10px;
+    }
+    .cart-btns button {
+      padding: 10px 20px;
+      background-color: #f0f0f0;
+      color: #333;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.2s ease;
+    }
+    .cart_remove {
+      width: 20px;
+      height: 20px;
+      text-align: center;
+      cursor: pointer;
+      padding: 0px 0px 4px;
+      font-weight: bold;
+      border: 0.5px solid #9c9c9c;
+      background-color: #f0f0f0;
+      border-radius: 10px;
+    }
+    .add_more_item_div,
+    .remove_item_div {
+      text-align: center;
+      margin-top: 30px;
+    }
+    #to_add_name,
+    #to_add_price,
+    #show_price {
+      width: 150px;
+      height: 30px;
+      font-size: 16px;
+      margin: 0;
+      padding: 0px 2px 1px;
+      border: 0;
+      border-bottom: 1px solid #747474;
+      outline: none;
+    }
+    #select_cat,
+    #select_cat_remove,
+    #select_item {
+      width: 154px;
+      height: 30px;
+      font-size: 16px;
+      margin: 0;
+      border: 0;
+      padding-bottom: 3px;
+      border-bottom: 1px solid #747474;
+      outline: none;
+    }
+    #final_add_item,
+    #remove_item {
+      cursor: pointer;
+      margin: 0px 5px 0px 5px;
+      padding: 10px 15px;
+      font-size: 16px;
+      background-color: #f0f0f0;
+      color: black;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .addAndRemove {
+      display: none;
+    }
+  </style>
+  <body>
+    <script>
+      var total_price = 0;
+      var login_user = {};
+      var order_list = new Array();
+      var cart = new Array();
+      var idRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9_]{5,21}$/;
+      var pwRegex =
+        /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@*`/?_])[a-zA-Z0-9!@*`/?_]{10,16}$/;
+      //유저 데이터 추가
+      var user_data = new Array();
+      function User(id, pw, admin = false) {
+        this.id = id;
+        this.pw = pw;
+        this.admin = admin;
+      }
+      function register(id, pw, admin = false) {
+        var member = new User(id, pw, admin);
+        user_data.push(member);
+      }
+      function history(id, cart_data, total_price, time) {
+        this.id = id;
+        this.cart_data = cart_data;
+        this.total_price = total_price;
+        this.time = time;
+      }
+      function add_history(id, cart_data, total_price, time) {
+        var new_history = new history(id, cart_data, total_price, time);
+        order_list.push(new_history);
+      }
+      register("admin", "admin", true);
+      register("testUser1", "123qwe123?");
+      register("testUser2", "qweqweqwe1?");
+      register("testUser3", "oieknmf2?");
+      register("a", "a");
+      console.log(user_data);
+      //상품 데이터 추가
+      var item_data_food = new Array();
+      var item_data_drink = new Array();
+      var item_data_snack = new Array();
+      var item_data_etc = new Array();
+      var itemDataArray;
+      function Item(item_name, item_price) {
+        this.item_name = item_name;
+        this.item_price = item_price;
+      }
+      function add_item(item_name, item_price, cat) {
+        var item = new Item(item_name, item_price);
+        if (cat == "식사") {
+          item_data_food.push(item);
+        } else if (cat == "음료") {
+          item_data_drink.push(item);
+        } else if (cat == "간식") {
+          item_data_snack.push(item);
+        } else {
+          item_data_etc.push(item);
+        }
+      }
+      add_item("라면", 2500, "식사");
+      add_item("콜라", 2000, "음료");
+      add_item("제로콜라", 2000, "음료");
+      add_item("사이다", 2000, "음료");
+      add_item("초코과자", 1500, "간식");
+      add_item("김치볶음밥", 4500, "식사");
+      add_item("물", 1000, "음료");
+      add_item("레몬에디드", 2500, "음료");
+      add_item("딸기스무디", 4000, "음료");
+      add_item("바나나스무디", 4000, "음료");
+      add_item("아이스아메리카노", 3000, "음료");
+      add_item("카페라떼", 3000, "음료");
+      add_item("상품권0.5", 5000, "기타");
+      add_item("상품권1.0", 10000, "기타");
+      add_item("상품권3.0", 30000, "기타");
+      add_item("상품권5.0", 50000, "기타");
+      add_item("상품권10.0", 100000, "기타");
+      add_item("감자튀김 L", 2500, "간식");
+      add_item("감자튀김 M", 2000, "간식");
+      add_item("치즈 감자튀김", 2500, "간식");
+      add_item("어니언 감자튀김", 2500, "간식");
+      add_item("회오리감자", 2500, "간식");
+      add_item("짜장라면", 2500, "식사");
+      add_item("떡볶이", 3000, "식사");
+      add_item("토스트", 3000, "식사");
+      add_item("소시지", 3500, "식사");
+      add_item("냉면", 7000, "식사");
+      add_item("밀면", 7000, "식사");
+      add_item("너구리 라면", 2500, "식사");
+      add_item("비빔면", 2500, "식사");
+      add_item("짜파게티", 2500, "식사");
+      add_item("신라면", 2500, "식사");
+      $(function () {
+        //로그인 로그아웃 회원가입
+        $("#id").on("input", function () {
+          $("#id").val($("#id").val().replace(" ", ""));
+        });
+        $("#pw").on("input", function () {
+          $("#pw").val($("#pw").val().replace(" ", ""));
+        });
+        $("#login_btn").on("click", function () {
+          if ($("#id").val() == "") {
+            $("#login_notification_content").text("아이디를 입력해 주세요.");
+            $("#login_notification_content").css("color", "red");
+            $("#id").focus();
+          } else if ($("#pw").val() == "") {
+            $("#login_notification_content").text("비밀번호를 입력해 주세요.");
+            $("#login_notification_content").css("color", "red");
+            $("#pw").focus();
+          } else {
+            var found = false;
+            for (const user of user_data) {
+              if (user.id == $("#id").val() && user.pw == $("#pw").val()) {
+                login_user = user;
+                found = true;
+                break;
+              }
+            }
+            if (found) {
+              $("#login_notification_content").text(
+                "로그인 성공. 잠시 후 화면이 바뀝니다"
+              );
+              $("#login_notification_content").css("color", "black");
+              $("#id").val("");
+              $("#pw").val("");
+              setTimeout(() => {
+                $(".login_screen").css("display", "none");
+                if (login_user.admin) {
+                  $(".admin_user_screen").css("display", "block");
+                  $("#show_user_list").click();
+                } else {
+                  $(".general_user_screen").css("display", "block");
+                  $("#show_item_list").click();
+                  $("#welcome_user").text(login_user.id + "님");
+                }
+              }, 1000);
+            } else {
+              $("#login_notification_content").text(
+                "아이디 혹은 비밀번호가 잘못되었습니다."
+              );
+              $("#login_notification_content").css("color", "red");
+            }
+          }
+        });
+        $("#register_btn").on("click", function () {
+          if ($("#id").val() == "") {
+            $("#login_notification_content").text("아이디를 입력해 주세요.");
+            $("#login_notification_content").css("color", "red");
+            $("#id").focus();
+          } else if ($("#pw").val() == "") {
+            $("#login_notification_content").text("비밀번호를 입력해 주세요.");
+            $("#login_notification_content").css("color", "red");
+            $("#pw").focus();
+          } else {
+            $("#login_notification_content").text(
+              "아이디 혹은 비밀번호를 입력해 주세요."
+            );
+            $("#login_notification_content").css("color", "red");
+            $("#pw").focus();
+            var isDuplicate = user_data.some(function (user) {
+              return user.id === $("#id").val();
+            });
+            if (isDuplicate) {
+              $("#login_notification_content").text(
+                "해당 아이디는 이미 등록된 아이디 입니다."
+              );
+              $("#login_notification_content").css("color", "red");
+            } else {
+              if (!idRegex.test($("#id").val())) {
+                $("#login_notification_content").text(
+                  "아이디는 5~21자리이며, 영문자 1자 이상 포함해야 합니다. 숫자, 특수문자(_)사용 가능"
+                );
+                $("#id").focus();
+                $("#login_notification_content").css("color", "red");
+              } else if (!pwRegex.test($("#pw").val())) {
+                $("#login_notification_content").text(
+                  "비밀번호는 10~16자리이며, 영문자, 숫자, 특수문자(!@*`/?_) 각 1자 이상 포함해야 합니다."
+                );
+                $("#pw").focus();
+                $("#login_notification_content").css("color", "red");
+              } else {
+                register($("#id").val(), $("#pw").val());
+                $("#login_notification_content").text(
+                  "회원가입 완료. 다시 로그인 해주세요"
+                );
+                $("#login_notification_content").css("color", "black");
+                $("#id").val("");
+                $("#pw").val("");
+                $("#id").focus();
+              }
+            }
+          }
+        });
+        $(document).on("click", "#logout_btn", function () {
+          login_user = {};
+          alert("로그아웃 되었습니다.");
+          $("#login_notification_content").text("");
+          $(".login_screen").css("display", "block");
+          $(".admin_user_screen").css("display", "none");
+          $(".general_user_screen").css("display", "none");
+        });
+        //공통
+        //주문내역 확인
+        $(document).on("click", "#show_order_list", function () {
+          if (login_user.admin) {
+            $("#user_list").css("display", "none");
+            $("#order_list_div_admin").css("display", "block");
+            $(".addAndRemove").css("display", "none");
+            $("#create_order_list_admin").empty();
+            for (const [index, history] of order_list.entries()) {
+              const $row = $("<tr></tr>").appendTo("#create_order_list_admin");
+              console.log(history);
+              $("<td></td>").text(history.id).appendTo($row);
+              var li = history.cart_data;
+              var resultString = "";
+              for (var i = 0; i < li.length; i++) {
+                resultString += li[i].item_name;
+                if (i < li.length - 1) {
+                  resultString += ", ";
+                }
+              }
+              $("<td></td>").text(resultString).appendTo($row);
+              $("<td></td>")
+                .text(history.total_price + "원")
+                .appendTo($row);
+              let year = history.time.getFullYear();
+              let month = String(history.time.getMonth() + 1).padStart(2, "0");
+              let day = String(history.time.getDate()).padStart(2, "0");
+              let hours = String(history.time.getHours()).padStart(2, "0");
+              let minutes = String(history.time.getMinutes()).padStart(2, "0");
+              let seconds = String(history.time.getSeconds()).padStart(2, "0");
+              let formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+              $("<td></td>").text(formattedDateTime).appendTo($row);
+            }
+          } else {
+            $("#create_order_list").empty();
+            $(".items").css("display", "none");
+            $("#order_list_div").css("display", "block");
+            for (const [index, history] of order_list.entries()) {
+              if (history.id == login_user.id) {
+                const $row = $("<tr></tr>").appendTo("#create_order_list");
+                console.log(history);
+                var li = history.cart_data;
+                var resultString = "";
+                for (var i = 0; i < li.length; i++) {
+                  resultString += li[i].item_name;
+                  if (i < li.length - 1) {
+                    resultString += ", ";
+                  }
+                }
+                $("<td></td>").text(resultString).appendTo($row);
+                $("<td></td>")
+                  .text(history.total_price + "원")
+                  .appendTo($row);
+                let year = history.time.getFullYear();
+                let month = String(history.time.getMonth() + 1).padStart(
+                  2,
+                  "0"
+                );
+                let day = String(history.time.getDate()).padStart(2, "0");
+                let hours = String(history.time.getHours()).padStart(2, "0");
+                let minutes = String(history.time.getMinutes()).padStart(
+                  2,
+                  "0"
+                );
+                let seconds = String(history.time.getSeconds()).padStart(
+                  2,
+                  "0"
+                );
+                let formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+                $("<td></td>").text(formattedDateTime).appendTo($row);
+              }
+            }
+          }
+        });
+        //관리자관련
+        //유저관리(탈퇴시 주문내역 삭제, 관리자변경), 상품추가삭제
+        $("#show_user_list").on("click", function () {
+          $("#user_list").css("display", "block");
+          $("#order_list_div_admin").css("display", "none");
+          $(".addAndRemove").css("display", "none");
+          $("#create_user_data").empty();
+          for (const [index, user] of user_data.entries()) {
+            if (login_user.id !== user.id) {
+              const $row = $("<tr></tr>").appendTo("#create_user_data");
+              $("<td></td>").text(user.id).appendTo($row);
+              $("<td></td>").text(user.pw).appendTo($row);
+              if (user.admin) {
+                $("<td></td>").text("관리자").appendTo($row);
+              } else {
+                $("<td></td>").text("일반유저").appendTo($row);
+              }
+              const $buttons = $("<td></td>").appendTo($row);
+              $("<button></button>")
+                .text("회원 탈퇴")
+                .attr("class", "btn-ani user_list_btn kick_btn")
+                .appendTo($buttons)
+                .on("click", function () {
+                  var thisID = $(this).closest("tr").find("td:eq(0)").text();
+                  console.log(thisID);
+                  for (const [index, user] of user_data.entries()) {
+                    if (user.id == thisID) {
+                      if (user.admin) {
+                        alert("관리자는 탈퇴가 불가능 합니다.");
+                      } else {
+                        if (confirm("정말로 탈퇴시키겠습니까?")) {
+                          alert("유저" + user.id + " 탈퇴가 완료되었습니다.");
+                          user_data.splice(index, 1);
+                          order_list = order_list.filter(function (history) {
+                            return history.id !== thisID;
+                          });
+                          $("#show_user_list").click();
+                        } else {
+                          alert("탈퇴가 취소되었습니다.");
+                        }
+                      }
+                      break;
+                    }
+                  }
+                });
+              if (user.admin) {
+                $("<button></button>")
+                  .text("일반유저 변경")
+                  .attr("class", "btn-ani user_list_btn role_change_btn")
+                  .appendTo($buttons)
+                  .on("click", function () {
+                    var thisID = $(this).closest("tr").find("td:eq(0)").text();
+                    user_data.some(function (user) {
+                      if (user.id === thisID) {
+                        user.admin = false;
+                      }
+                    });
+                    $("#show_user_list").click();
+                  });
+              } else {
+                $("<button></button>")
+                  .text("관리자로 변경")
+                  .attr("class", "btn-ani user_list_btn role_change_btn")
+                  .appendTo($buttons)
+                  .on("click", function () {
+                    var thisID = $(this).closest("tr").find("td:eq(0)").text();
+                    user_data.some(function (user) {
+                      if (user.id === thisID) {
+                        user.admin = true;
+                      }
+                    });
+                    $("#show_user_list").click();
+                  });
+              }
+            }
+          }
+        });
+        $("#add_remove_item").on("click", function () {
+          $(".addAndRemove").css("display", "block");
+          $("#user_list").css("display", "none");
+          $("#order_list_div_admin").css("display", "none");
+          itemDataArray = item_data_food;
+          $("#select_item").empty();
+          $.each(itemDataArray, function (index, item) {
+            $("#select_item").append(
+              "<option value=" + index + ">" + item.item_name + "</option>"
+            );
+          });
+          var selectedItem = itemDataArray[$("#select_item").val()];
+          $("#show_price").val(selectedItem.item_price + "원");
+        });
+        $("#final_add_item").on("click", function () {
+          var name = $("#to_add_name").val();
+          var price = $("#to_add_price").val();
+          var cal = $("#select_cat").val();
+          if (name == "") {
+            alert("추가할 상품의 '이름'을 입력하세요");
+            $("#to_add_name").focus();
+          } else if (isNaN(parseInt(price))) {
+            alert("추가할 상품의 '가격'을 입력하세요");
+            $("#to_add_price").focus();
+          } else if (name != "" && !isNaN(parseInt(price))) {
+            if (cal == "식사") {
+              add_item(name, parseInt(price), "식사");
+            } else if (cal == "간식") {
+              add_item(name, parseInt(price), "간식");
+            } else if (cal == "음료") {
+              add_item(name, parseInt(price), "음료");
+            } else {
+              add_item(name, parseInt(price), "기타");
+            }
+            alert("상품이 추가되었습니다.");
+            $("#to_add_name").val("");
+            $("#to_add_price").val("");
+            $("#to_add_name").focus();
+          }
+        });
+        $("#select_cat_remove").on("change", function () {
+          let selectedCategory = $(this).val();
+          if (selectedCategory === "식사") {
+            itemDataArray = item_data_food;
+          } else if (selectedCategory === "음료") {
+            itemDataArray = item_data_drink;
+          } else if (selectedCategory === "간식") {
+            itemDataArray = item_data_snack;
+          } else {
+            itemDataArray = item_data_etc;
+          }
+          $("#select_item").empty();
+          $.each(itemDataArray, function (index, item) {
+            $("#select_item").append(
+              "<option value=" + index + ">" + item.item_name + "</option>"
+            );
+          });
+          $("#show_price").val(itemDataArray[0].item_price + "원");
+        });
+        $("#select_item").on("change", function () {
+          $("#show_price").val(
+            itemDataArray[$("#select_item").val()].item_price + "원"
+          );
+        });
+        $("#remove_item").on("click", function () {
+          let selectedCategory = $("#select_cat_remove").val();
+          let selectedItemIndex = $("#select_item").val();
+          if (selectedCategory === "식사") {
+            itemDataArray = item_data_food.splice(selectedItemIndex, 1);
+          } else if (selectedCategory === "음료") {
+            itemDataArray = item_data_drink.splice(selectedItemIndex, 1);
+          } else if (selectedCategory === "간식") {
+            itemDataArray = item_data_snack.splice(selectedItemIndex, 1);
+          } else {
+            itemDataArray = item_data_etc.splice(selectedItemIndex, 1);
+          }
+          alert("제거되었습니다.");
+          $("#select_item").empty();
+          $.each(itemDataArray, function (index, item) {
+            $("#select_item").append(
+              "<option value=" + index + ">" + item.item_name + "</option>"
+            );
+          });
+          $("#show_price").val(itemDataArray[0].item_price + "원");
+        });
+        //유저관련
+        //상품 보기, 장바구니
+        $(document).on("click", "#show_item_list", function () {
+          $(".items").css("display", "block");
+          $("#order_list_div").css("display", "none");
+          $("#show_food_list").click();
+        });
+        $("#show_food_list").on("click", function () {
+          $("#item_list").empty();
+          for (const [index, item] of item_data_food.entries()) {
+            const $d1 = $("<div></div>")
+              .attr("id", "each_item")
+              .appendTo("#item_list");
+            $("<h3></h3>").text(item.item_name).appendTo($d1);
+            $("<p></p>").text(item.item_price).appendTo($d1);
+            $("<p></p>").text("원").appendTo($d1);
+          }
+        });
+        $("#show_snack_list").on("click", function () {
+          $("#item_list").empty();
+          for (const [index, item] of item_data_snack.entries()) {
+            const $d1 = $("<div></div>")
+              .attr("id", "each_item")
+              .appendTo("#item_list");
+            $("<h3></h3>").text(item.item_name).appendTo($d1);
+            $("<p></p>").text(item.item_price).appendTo($d1);
+            $("<p></p>").text("원").appendTo($d1);
+          }
+        });
+        $("#show_drink_list").on("click", function () {
+          $("#item_list").empty();
+          for (const [index, item] of item_data_drink.entries()) {
+            const $d1 = $("<div></div>")
+              .attr("id", "each_item")
+              .appendTo("#item_list");
+            $("<h3></h3>").text(item.item_name).appendTo($d1);
+            $("<p></p>").text(item.item_price).appendTo($d1);
+            $("<p></p>").text("원").appendTo($d1);
+          }
+        });
+        $("#show_etc_list").on("click", function () {
+          $("#item_list").empty();
+          for (const [index, item] of item_data_etc.entries()) {
+            const $d1 = $("<div></div>")
+              .attr("id", "each_item")
+              .appendTo("#item_list");
+            $("<h3></h3>").text(item.item_name).appendTo($d1);
+            $("<p></p>").text(item.item_price).appendTo($d1);
+            $("<p></p>").text("원").appendTo($d1);
+          }
+        });
+        $(document).on("click", "#each_item", function () {
+          var name = $(this).find("h3").text();
+          var price = parseInt($(this).find("p").text());
+          cart.push(new Item(name, price));
+          total_price += parseInt($(this).find("p").text());
+          reload_cart();
+          $(this).addClass("button-animation");
+          setTimeout(function () {
+            $(this).removeClass("button-animation");
+          }, 200);
+        });
+        function reload_cart() {
+          $("#create_cart_table").fadeOut(150, function () {
+            // Clear the table
+            $(this).empty();
+            for (const [index, item] of cart.entries()) {
+              const $row = $("<tr></tr>").appendTo("#create_cart_table");
+              $("<td></td>")
+                .text(index + 1)
+                .appendTo($row);
+              $("<td></td>").text(item.item_name).appendTo($row);
+              $("<td></td>")
+                .text(item.item_price + "원")
+                .appendTo($row);
+              const $button = $("<td></td>").appendTo($row);
+              $("<button></button>")
+                .text("x")
+                .attr("class", "cart_remove")
+                .appendTo($button)
+                .on("click", function () {
+                  var index = $(this).closest("tr").find("td:eq(0)").text();
+                  var price = parseInt(
+                    $(this).closest("tr").find("td:eq(2)").text()
+                  );
+                  total_price -= price;
+                  cart.splice(index - 1, 1);
+                  reload_cart();
+                });
+            }
+            $("#total_price").text(total_price);
+            $(this).fadeIn(300);
+          });
+        }
+        $("#clear_cart").on("click", function () {
+          cart = new Array();
+          total_price = 0;
+          reload_cart();
+        });
+        $("#make_order").on("click", function () {
+          if (cart.length > 0) {
+            add_history(login_user.id, cart, total_price, new Date());
+            console.log(order_list);
+            alert("주문 완료되었습니다.");
+            cart = new Array();
+            total_price = 0;
+            reload_cart();
+          } else {
+            alert("상품을 추가해주세요");
+          }
+        });
+        //hover animation
+        $(document).on("mouseenter", "#each_item", function () {
+          $(this).css("background-color", "#c0c0c0");
+          $(this).css("color", "white");
+        });
+        $(document).on("mouseleave", "#each_item", function () {
+          $(this).css("background-color", "white");
+          $(this).css("color", "#333");
+        });
+        $(document).on("mouseenter", ".btn-hover", function () {
+          $(this).css("background-color", "rgb(177, 177, 177)");
+          $(this).css("color", "white");
+        });
+        $(document).on("mouseleave", ".btn-hover", function () {
+          $(this).css("background-color", "white");
+          $(this).css("color", "#333");
+        });
+        $(document).on("mouseenter", ".btn-ani", function () {
+          $(this).css("background-color", "#c0c0c0");
+          $(this).css("color", "white");
+        });
+        $(document).on("mouseleave", ".btn-ani", function () {
+          $(this).css("background-color", "#f0f0f0");
+          $(this).css("color", "#333");
+        });
+      });
+    </script>
+  </body>
+  <div class="login_screen">
+    <form onsubmit="return false">
+      <h1>Term Project Login</h1>
+      <div class="login_box">
+        <input
+          type="text"
+          placeholder="아이디"
+          id="id"
+          name="id"
+          class="input_box"
+          maxlength="21"
+        /><br />
+        <input
+          type="password"
+          placeholder="비밀번호"
+          id="pw"
+          name="pw"
+          class="input_box"
+          maxlength="16"
+        />
+      </div>
+      <div class="login_notification">
+        <p id="login_notification_content"></p>
+      </div>
+      <div class="login_register_btn">
+        <button type="submit" id="login_btn">로그인</button>
+        <button id="register_btn">회원가입</button>
+      </div>
+    </form>
+  </div>
+  <div class="admin_user_screen">
+    <div class="main_menu">
+      <div class="role">
+        <h1>관리자 페이지</h1>
+      </div>
+      <div class="main_menu_buttons">
+        <button class="btn-hover" id="show_user_list">회원 정보 로드</button>
+        <button class="btn-hover" id="show_order_list">주문 내역</button>
+        <button class="btn-hover" id="add_remove_item">상품 추가/제거</button>
+      </div>
+      <button id="logout_btn">로그아웃</button>
+    </div>
+    <div id="user_list">
+      <table class="user_table">
+        <thead>
+          <tr>
+            <th>아이디</th>
+            <th>비밀번호</th>
+            <th>관리자 여부</th>
+            <th>기능</th>
+          </tr>
+        </thead>
+        <tbody id="create_user_data"></tbody>
+      </table>
+    </div>
+    <div id="order_list_div_admin">
+      <table class="order_list_table_admin">
+        <thead>
+          <tr>
+            <th>아이디</th>
+            <th>주문내역</th>
+            <th>총 가격</th>
+            <th>주문일시</th>
+          </tr>
+        </thead>
+        <tbody id="create_order_list_admin"></tbody>
+      </table>
+    </div>
+    <div class="addAndRemove">
+      <div class="add_more_item_div">
+        <select id="select_cat">
+          <option value="식사">🍜식사</option>
+          <option value="간식">🍪간식</option>
+          <option value="음료">🍹음료</option>
+          <option value="기타">🔗기타</option>
+        </select>
+        <input type="text" id="to_add_name" placeholder="추가할 상품" />
+        <input type="text" id="to_add_price" placeholder="가격" />
+        <button class="btn-ani" id="final_add_item">추가</button>
+      </div>
+      <div class="remove_item_div">
+        <select id="select_cat_remove">
+          <option value="식사">🍜식사</option>
+          <option value="간식">🍪간식</option>
+          <option value="음료">🍹음료</option>
+          <option value="기타">🔗기타</option>
+        </select>
+        <select id="select_item"></select>
+        <input type="text" id="show_price" placeholder="가격" readonly />
+        <button class="btn-ani" id="remove_item">제거</button>
+      </div>
+    </div>
+  </div>
+  <div class="general_user_screen">
+    <div class="main_menu">
+      <div class="role">
+        <h1 id="welcome_user">General User</h1>
+      </div>
+      <div class="main_menu_buttons">
+        <button class="btn-hover" id="show_item_list">상품 보기</button>
+        <button class="btn-hover" id="show_order_list">주문 내역</button>
+      </div>
+      <button id="logout_btn">로그아웃</button>
+    </div>
+    <div class="items">
+      <div id="item_cart">
+        <div id="cat_items">
+          <div class="item_category">
+            <button class="item_cat_btn btn-ani" id="show_food_list">
+              🍜식사
+            </button>
+            <div class="cat_divider"></div>
+            <button class="item_cat_btn btn-ani" id="show_snack_list">
+              🍪간식
+            </button>
+            <div class="cat_divider"></div>
+            <button class="item_cat_btn btn-ani" id="show_drink_list">
+              🍹음료
+            </button>
+            <div class="cat_divider"></div>
+            <button class="item_cat_btn btn-ani" id="show_etc_list">
+              🔗기타
+            </button>
+          </div>
+          <div id="item_list"></div>
+        </div>
+        <div id="cart">
+          <h2>🧺장바구니</h2>
+          <div id="cart_table_div">
+            <table id="cart_table">
+              <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>상품명</th>
+                  <th>가격</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="create_cart_table"></tbody>
+            </table>
+          </div>
+          <div id="total_price_div">
+            <p>총합:</p>
+            <p id="total_price">0</p>
+            <p>원</p>
+          </div>
+          <div class="cart-btns">
+            <button class="btn-ani" id="clear_cart">비우기</button>
+            <button class="btn-ani" id="make_order">주문하기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="order_list_div">
+      <table class="order_list_table">
+        <thead>
+          <tr>
+            <th>주문내역</th>
+            <th>총 가격</th>
+            <th>주문일시</th>
+          </tr>
+        </thead>
+        <tbody id="create_order_list"></tbody>
+      </table>
+    </div>
+  </div>
+</html>
